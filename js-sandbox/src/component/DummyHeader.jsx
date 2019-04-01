@@ -1,5 +1,12 @@
 import React, {Component} from 'react';
 import PropTypes from "prop-types";
+import {
+    Collapse,
+    Navbar,
+    NavbarBrand,
+    Nav,
+    NavItem,
+} from 'reactstrap';
 
 class DummyHeader extends Component {
     constructor(props) {
@@ -11,15 +18,24 @@ class DummyHeader extends Component {
         const myData = this.props.data;
         console.log(myData);
         return <header className="row">
-            <h1 className="col-md-12">
-                {this.state.date.getDate()}
-            </h1>
+
             <div className="col-md-12">
-                {myData.map((o) => {
-                        return <a key={o.label} href={o.link}
-                        onClick={()=>this.props.onclick(o.id)}>{o.label}</a>
-                    }
-                )}
+
+
+            <Navbar color="light" light expand="md">
+                <NavbarBrand href="/">ROQUETA</NavbarBrand>
+                <Collapse isOpen={this.state.isOpen} navbar>
+                    <Nav className="ml-auto" navbar>
+                        <NavItem>
+                            {myData.map((o) => {
+                                    return <a key={o.label} href={o.link}
+                                              onClick={()=>this.props.onclick(o.id)}>{' '}{o.label}</a>
+                                }
+                            )}
+                        </NavItem>
+                    </Nav>
+                </Collapse>
+            </Navbar>
             </div>
         </header>;
     }
